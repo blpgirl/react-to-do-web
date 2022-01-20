@@ -57,6 +57,7 @@ class Todo extends React.Component {
               <span>
                   <input type="checkbox" checked={this.state.done} onClick={this.handleClick} />
                   <input type="text" value={this.state.text}
+                                className={(this.state.done)? 'done':'not-done'} 
                                 onChange={this.handleChange}
                                 onBlur={this.handleSubmit} />
                 </span>
@@ -85,8 +86,8 @@ class TodoList extends React.Component {
   newTodo(event){
     event.preventDefault();
 
-    todos = this.state.todos;
-    
+    var todos = this.state.todos;
+
     // push a new empty object to the array of ToDos
     todos.push({ id: "" });
 

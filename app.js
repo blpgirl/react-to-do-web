@@ -80,6 +80,7 @@ var Todo = function (_React$Component) {
           null,
           React.createElement("input", { type: "checkbox", checked: this.state.done, onClick: this.handleClick }),
           React.createElement("input", { type: "text", value: this.state.text,
+            className: this.state.done ? 'done' : 'not-done',
             onChange: this.handleChange,
             onBlur: this.handleSubmit })
         )
@@ -115,7 +116,7 @@ var TodoList = function (_React$Component2) {
     value: function newTodo(event) {
       event.preventDefault();
 
-      todos = this.state.todos;
+      var todos = this.state.todos;
 
       // push a new empty object to the array of ToDos
       todos.push({ id: "" });
