@@ -3,7 +3,7 @@ class Todo extends React.Component {
       super(props);
 
       // set done attribute and text attribute pass down
-      this.state = { done: (this.props.done == "true" && props.done),
+      this.state = { done: props.done,
                      text: props.text
                    };
 
@@ -69,6 +69,7 @@ class TodoList extends React.Component {
   constructor(props){
     super(props);
 
+    // setting 5 todos by default
     this.state = {
                   todos: [
                     { id: 1, text: "Item 1", done: false},
@@ -76,25 +77,44 @@ class TodoList extends React.Component {
                     { id: 3, text: "Item 3", done: false},
                     { id: 4, text: "Item 4", done: false}
                   ]
-                }
+                };
+
+      this.newTodo = this.newTodo.bind(this);
     }
+
+  newTodo(event){
+    event.preventDefault();
+
+    todos = this.state.todos;
+    
+    // push a new empty object to the array of ToDos
+    todos.push({ id: "" });
+
+    this.setState(state => ({
+      todos: todos
+    }));
+  }
 
   render(){
     const todoList = this.state.todos.map((todo) =>
       <Todo key={todo.id.toString()} id={todo.id} text={todo.text} done={todo.done} />
     );
 
+    // React.fragment is an abstract way of defining a div element
+    // {todoList} render each of the 5 todos according to Todo component
     return <React.Fragment>
             <h1>React To-do App</h1>
 
             {todoList}
+
+            <a href="#" onClick={this.newTodo}>New Todo</a>
           </React.Fragment>
   } // render
 } // class
 
 // Le digo que use el componente Todo para mostrar contenido en el div root
 ReactDOM.render(
-  // render the TodoList component
+  // render the TodoList component, don't need to pass anything because everything is set up on the constructor
   <TodoList />,
   document.getElementById('root')
 )
